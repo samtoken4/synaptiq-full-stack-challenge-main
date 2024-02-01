@@ -1,21 +1,19 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { useMemo, useState } from "react";
+import { FilterStatus, TodoItem } from "../../types/todosType";
+import AddTodoForm from "./AddTodoForm";
 import TodoListItem from "./TodoListItem";
-
-type TodoItem = {
-    id: number,
-    name: string,
-    completed: boolean,
-}
 
 const defaultTodos: TodoItem[] = [{ id: 1, name: 'Pay electric bill', completed: false }, { id: 2, name: 'Walk the dog', completed: false }];
 
-enum FilterStatus {
-    ALL = 'all',
-    ACTIVE = 'active',
-    COMPLETE = 'complete'
-}
-
+export const buttonStyle = {
+    padding: "4px",
+    margin: '8px 12px',
+    color: "white",
+    "&:hover": {
+        backgroundColor: "#1188e1",
+    },
+};
 const TodoList = () => {
     const defaultTodosList = { [defaultTodos[0].id]: defaultTodos[0], [defaultTodos[1].id]: defaultTodos[1] };
 
@@ -41,15 +39,6 @@ const TodoList = () => {
     const completedTodos = Object.fromEntries(Object.entries(todosList).filter(([_itemId, todoItem]) => {
         return todoItem.completed;
     }));
-
-    const buttonStyle = {
-        padding: "4px",
-        margin: '8px 12px',
-        color: "white",
-        "&:hover": {
-            backgroundColor: "#1188e1",
-        },
-    };
 
     const renderFilters = () => (<div>
         <Button
@@ -124,58 +113,35 @@ const TodoList = () => {
     };
 
     const renderTodosList = () => (
-    <>
-        {currentTodoList?.length 
-            ?
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                textAlign: 'left',
-                padding: '0px 38px'
-            }}>
-                {currentTodoList.map(([itmId, todoItem]) => {
-                    const parsedItemId = parseInt(itmId);
+        <>
+            {currentTodoList?.length
+                ?
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    textAlign: 'left',
+                    padding: '0px 38px'
+                }}>
+                    {currentTodoList.map(([itmId, todoItem]) => {
+                        const parsedItemId = parseInt(itmId);
 
-                    return <div key={itmId} >
-                        <TodoListItem
-                            listItemCompleted={todosList[parsedItemId].completed}
-                            itemId={parsedItemId}
-                            name={todoItem.name}
-                            handleOnChange={handleCheckBoxChange}
-                        />
-                    </div>
-                })}
-            </div>
-            : 
-            renderNoItemsMessage(filter)}
-    </>);
+                        return <div key={itmId} >
+                            <TodoListItem
+                                listItemCompleted={todosList[parsedItemId].completed}
+                                itemId={parsedItemId}
+                                name={todoItem.name}
+                                handleOnChange={handleCheckBoxChange}
+                            />
+                        </div>
+                    })}
+                </div>
+                :
+                renderNoItemsMessage(filter)}
+        </>);
 
-    const renderForm = () => (
-        <Container maxWidth='sm' sx={{ width: '450px', display: 'flex', alignItems: 'center' }}>
-            <TextField
-                data-test={'new-todo'}
-                sx={{ padding: '10px' }}
-                onChange={(e) => setNewTodo(e.target.value)}
-                variant='outlined'
-                fullWidth
-                margin='normal'
-                value={newTodo}
-                onKeyDown={handleKeyPress}
-                placeholder="New todo item"
-            />
-            <Button sx={{
-                ...buttonStyle,
-                height: '32px',
-                color: "black",
-                fontWeight: 600,
-                backgroundColor: "#c2bfbf",
-                "&:hover": {
-                    backgroundColor: "#c2bfbf",
-                }
-            }} onClick={addTodo}>Add</Button>
-        </Container>
-
-    );
+    const updateTodo = (value: string) => {
+        setNewTodo(value);
+    };
 
     const renderClearCompletedButton = () => {
         return Object.keys(completedTodos).length ?
@@ -200,12 +166,12 @@ const TodoList = () => {
     return (
         <Box textAlign='center' className='todo-list' mt={4}>
             <>
-                {renderForm()}
+                <AddTodoForm updateTodo={updateTodo} handleKeyPress={handleKeyPress} newTodo={newTodo} addTodo={addTodo} />
 
-                <div style={{ display: 'flex', margin: '24px' }} className="buttons">
+                <Box style={{ display: 'flex', margin: '24px' }} className="buttons">
                     {renderFilters()}
                     {renderClearCompletedButton()}
-                </div>
+                </Box>
 
                 {renderTodosList()}
             </>
