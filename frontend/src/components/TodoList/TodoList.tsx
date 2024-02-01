@@ -144,26 +144,6 @@ const TodoList = () => {
         setNewTodo(value);
     };
 
-    const ClearCompletedButton = () => {
-        return Object.keys(completedTodos).length ?
-            <Button
-                sx={{
-                    backgroundColor: "white",
-                    ...buttonStyle,
-                    color: "#b7325f",
-                    fontWeight: 600,
-                    "&:hover": {
-                        backgroundColor: "#b7325f",
-                        color: "white",
-                    },
-                }}
-                onClick={handleClearCompleted}
-            >
-                Clear completed
-            </Button>
-            : null
-    }
-
     return (
         <Box textAlign='center' className='todo-list' mt={4}>
             <>
@@ -171,7 +151,7 @@ const TodoList = () => {
 
                 <Box style={{ display: 'flex', margin: '24px' }} className="buttons">
                     {renderFilters()}
-                    {<ClearCompletedButton />}
+                    {Object.keys(completedTodos).length ? <ClearCompletedButton onClick={handleClearCompleted} /> : null}
                 </Box>
 
                 {renderTodosList()}
@@ -179,5 +159,23 @@ const TodoList = () => {
         </Box>
     );
 };
+
+const ClearCompletedButton = ({onClick}: {onClick: () => void}) => {
+    return <Button
+            sx={{
+                backgroundColor: "white",
+                ...buttonStyle,
+                color: "#b7325f",
+                fontWeight: 600,
+                "&:hover": {
+                    backgroundColor: "#b7325f",
+                    color: "white",
+                },
+            }}
+            onClick={onClick}
+        >
+            Clear completed
+        </Button>
+}
 
 export default TodoList;
