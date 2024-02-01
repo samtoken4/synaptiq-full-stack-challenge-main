@@ -7,7 +7,7 @@ import TodoListItem from "./TodoListItem";
 const defaultTodos: TodoItem[] = [{ id: 1, name: 'Pay electric bill', completed: false }, { id: 2, name: 'Walk the dog', completed: false }];
 
 export const buttonStyle = {
-    padding: "4px",
+    padding: "2px",
     margin: '8px 12px',
     color: "white",
     "&:hover": {
