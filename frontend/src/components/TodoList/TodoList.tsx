@@ -144,7 +144,7 @@ const TodoList = () => {
         setNewTodo(value);
     };
 
-    const renderClearCompletedButton = () => {
+    const ClearCompletedButton = () => {
         return Object.keys(completedTodos).length ?
             <Button
                 sx={{
@@ -171,7 +171,7 @@ const TodoList = () => {
 
                 <Box style={{ display: 'flex', margin: '24px' }} className="buttons">
                     {renderFilters()}
-                    {renderClearCompletedButton()}
+                    {<ClearCompletedButton />}
                 </Box>
 
                 {renderTodosList()}

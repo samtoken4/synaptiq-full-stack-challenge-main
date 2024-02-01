@@ -9,22 +9,25 @@ interface TodoListItemProps {
 
 const TodoListItem = ({ listItemCompleted, itemId, handleOnChange, name }: TodoListItemProps) => {
     return (
-        <TableRow
-            style={{ width: '300px' }}
-            className={listItemCompleted ? 'completed' : ''}
+        <li style={{ listStyleType: 'none' }} 
+            className={listItemCompleted ? 'completed' : ''} 
         >
-            <TableCell style={{ width: '300px' }}>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={listItemCompleted}
-                            onChange={() => handleOnChange(listItemCompleted, itemId)}
-                        />
-                    }
-                    label={name}
-                />
-            </TableCell>
-        </TableRow>
+            <TableRow
+                style={{ width: '300px' }}
+            >
+                <TableCell style={{ width: '300px' }}>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={listItemCompleted}
+                                onChange={() => handleOnChange(listItemCompleted, itemId)}
+                            />
+                        }
+                        label={name}
+                    />
+                </TableCell>
+            </TableRow>
+        </li>
     );
 }
 
