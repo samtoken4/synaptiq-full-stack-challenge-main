@@ -113,7 +113,7 @@ const TodoList = () => {
             message = 'No todo items'
         }
 
-        return (<Typography sx={{ padding: '22px 38px', textAlign: 'left' }} variant="subtitle1">
+        return (<Typography sx={{ padding: '22px 64px', textAlign: 'center', width: '200px' }} variant="subtitle1">
             {message}
         </Typography>);
     };
