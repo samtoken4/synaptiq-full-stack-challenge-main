@@ -136,7 +136,8 @@ const TodoList = () => {
                     })}
                 </div>
                 :
-                renderNoItemsMessage(filter)}
+                renderNoItemsMessage(filter)
+            }
         </>);
 
     const updateTodo = (value: string) => {

@@ -1,5 +1,4 @@
-
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox, FormControlLabel, TableRow, TableCell } from "@mui/material";
 
 interface TodoListItemProps {
     listItemCompleted: boolean;
@@ -9,17 +8,24 @@ interface TodoListItemProps {
 };
 
 const TodoListItem = ({ listItemCompleted, itemId, handleOnChange, name }: TodoListItemProps) => {
-    return (<li style={{ listStyleType: 'none', minWidth: '150px' }} className={listItemCompleted ? 'completed' : ''} >
-        <FormControlLabel
-            control={
-                <Checkbox
-                    checked={listItemCompleted}
-                    onChange={() => handleOnChange(listItemCompleted, itemId)}
+    return (
+        <TableRow
+            style={{ width: '300px' }}
+            className={listItemCompleted ? 'completed' : ''}
+        >
+            <TableCell style={{ width: '300px' }}>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={listItemCompleted}
+                            onChange={() => handleOnChange(listItemCompleted, itemId)}
+                        />
+                    }
+                    label={name}
                 />
-            }
-            label={name}
-        />
-    </li>)
+            </TableCell>
+        </TableRow>
+    );
 }
 
 export default TodoListItem;
