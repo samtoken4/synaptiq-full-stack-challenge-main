@@ -122,15 +122,16 @@ const TodoList = () => {
         setTodosList({ ...todosList, [parsedItemId]: { ...todosList[parsedItemId], completed: !listItemCompleted } });
     };
 
-    const renderTodosList = () => (<>
-        {currentTodoList?.length ?
+    const renderTodosList = () => (
+    <>
+        {currentTodoList?.length 
+            ?
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
                 textAlign: 'left',
-                padding: '22px 38px'
+                padding: '0px 38px'
             }}>
-
                 {currentTodoList.map(([itmId, todoItem]) => {
                     const parsedItemId = parseInt(itmId);
 
@@ -142,10 +143,10 @@ const TodoList = () => {
                             handleOnChange={handleCheckBoxChange}
                         />
                     </div>
-                })
-                }
+                })}
             </div>
-            : renderNoItemsMessage(filter)}
+            : 
+            renderNoItemsMessage(filter)}
     </>);
 
     const renderForm = () => (

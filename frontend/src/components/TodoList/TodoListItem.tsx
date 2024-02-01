@@ -1,5 +1,5 @@
 
-import { Box, Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 interface TodoListItemProps {
     listItemCompleted: boolean;
