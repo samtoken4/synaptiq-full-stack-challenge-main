@@ -89,6 +89,7 @@ const TodoList = () => {
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             addTodo();
+            setFilter(FilterStatus.ALL);
         }
     };
 
